@@ -37,3 +37,10 @@
 
 */
 
+public abstract class Car
+{
+    string _name;
+    double _speed_kph;
+
+    public abstract bool Ride();
+}
