@@ -37,6 +37,16 @@
 
 */
 
+int way_length = 1000;
+
+SortedList<Car, int> race = new SortedList<Car, int>
+{
+    {new Sport_car {_name = "Sport car"}, way_length},
+    {new Moto_car {_name = "Passenger car"}, way_length},
+    {new Truck_car {_name = "Truck car"}, way_length},
+    {new Bus_car {_name = "Bus car"}, way_length}
+};
+
 public class Sport_car : Car
 {
     public string _name { get; set; }
@@ -74,7 +84,7 @@ public class Truck_car : Car
     {
         Random rand = new Random();
 
-        _speed_kph = rand.Next(100);
+        _speed_kph = rand.Next(95);
 
         return _speed_kph;
     }
@@ -88,7 +98,7 @@ public class Bus_car : Car
     {
         Random rand = new Random();
 
-        _speed_kph = rand.Next(100);
+        _speed_kph = rand.Next(80);
 
         return _speed_kph;
     }
