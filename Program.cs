@@ -37,10 +37,67 @@
 
 */
 
+public class Sport_car : Car
+{
+    public string _name { get; set; }
+    public int _speed_kph { get; set; }
+
+    public override int Ride()
+    {
+        Random rand = new Random();
+
+        _speed_kph = rand.Next(150);
+
+        return _speed_kph;
+    }
+}
+public class Moto_car : Car
+{
+    public string _name { get; set; }
+    public int _speed_kph { get; set; }
+
+    public override int Ride()
+    {
+        Random rand = new Random();
+
+        _speed_kph = rand.Next(110);
+
+        return _speed_kph;
+    }
+}
+public class Truck_car : Car
+{
+    public string _name { get; set; }
+    public int _speed_kph { get; set; }
+
+    public override int Ride()
+    {
+        Random rand = new Random();
+
+        _speed_kph = rand.Next(100);
+
+        return _speed_kph;
+    }
+}
+public class Bus_car : Car
+{
+    public string _name { get; set; }
+    public int _speed_kph { get; set; }
+
+    public override int Ride()
+    {
+        Random rand = new Random();
+
+        _speed_kph = rand.Next(100);
+
+        return _speed_kph;
+    }
+}
+
 public abstract class Car
 {
     string _name;
-    double _speed_kph;
+    int _speed_kph;
 
-    public abstract bool Ride();
+    public abstract int Ride();
 }
