@@ -37,77 +37,121 @@
 
 */
 
-int way_length = 1000;
+//int way_length = 1000;
 
-SortedList<Car, int> race = new SortedList<Car, int>
+//SortedList<Car, int> race = new SortedList<Car, int>
+//{
+//    {new Sport_car {_name = "Sport car", _speed_kph = 0}, way_length},
+//    {new Moto_car {_name = "Passenger car", _speed_kph = 0}, way_length},
+//    {new Truck_car {_name = "Truck car", _speed_kph = 0}, way_length},
+//    {new Bus_car {_name = "Bus car", _speed_kph = 0}, way_length}
+//};
+
+//RaceDel sport = race.Keys[0].Ride;
+//RaceDel moto = race.Keys[1].Ride;
+//RaceDel truck = race.Keys[2].Ride;
+//RaceDel bus = race.Keys[3].Ride;
+
+//foreach(var item in race.Keys)
+//{
+//    item.RaceEv += item.Ride;
+//}
+
+Race race = new Race ( new List<Car> { new Sport_car { _name = "car1" }, new Sport_car { _name = "car2" }, new Sport_car { _name = "car3" } } );
+
+foreach(var item in race._race)
 {
-    {new Sport_car {_name = "Sport car"}, way_length},
-    {new Moto_car {_name = "Passenger car"}, way_length},
-    {new Truck_car {_name = "Truck car"}, way_length},
-    {new Bus_car {_name = "Bus car"}, way_length}
-};
+    race.RaceEv += item.Ride;
+}
+
+race.Ride();
+
+public delegate void RaceDel();
+
+public class Race
+{
+    public event RaceDel RaceEv;
+    public List<Car> _race { get; set; }
+
+    public Race(List<Car> race)
+    {
+        _race = race;
+    }
+
+    public void Ride()
+    {
+        RaceEv();
+    }
+}
 
 public class Sport_car : Car
 {
     public string _name { get; set; }
     public int _speed_kph { get; set; }
+    public int _route {  get; set; }
 
-    public override int Ride()
+    public override void Ride()
     {
         Random rand = new Random();
 
         _speed_kph = rand.Next(150);
 
-        return _speed_kph;
+        _route -= _speed_kph;
+
+        WriteLine($"Car {_name} succesed {_speed_kph} route on it's way to finish!");
     }
 }
-public class Moto_car : Car
-{
-    public string _name { get; set; }
-    public int _speed_kph { get; set; }
+//public class Moto_car : Car
+//{
+//    public event RaceDel RaceEv;
+//    public string _name { get; set; }
+//    public int _speed_kph { get; set; }
 
-    public override int Ride()
-    {
-        Random rand = new Random();
+//    public override int Ride()
+//    {
+//        Random rand = new Random();
 
-        _speed_kph = rand.Next(110);
+//        _speed_kph = rand.Next(110);
 
-        return _speed_kph;
-    }
-}
-public class Truck_car : Car
-{
-    public string _name { get; set; }
-    public int _speed_kph { get; set; }
+//        return _speed_kph;
+//    }
+//}
+//public class Truck_car : Car
+//{
+//    public event RaceDel RaceEv;
+//    public string _name { get; set; }
+//    public int _speed_kph { get; set; }
 
-    public override int Ride()
-    {
-        Random rand = new Random();
+//    public override int Ride()
+//    {
+//        Random rand = new Random();
 
-        _speed_kph = rand.Next(95);
+//        _speed_kph = rand.Next(95);
 
-        return _speed_kph;
-    }
-}
-public class Bus_car : Car
-{
-    public string _name { get; set; }
-    public int _speed_kph { get; set; }
+//        return _speed_kph;
+//    }
+//}
+//public class Bus_car : Car
+//{
+//    public event RaceDel RaceEv;
+//    public string _name { get; set; }
+//    public int _speed_kph { get; set; }
 
-    public override int Ride()
-    {
-        Random rand = new Random();
+//    public override int Ride()
+//    {
+//        Random rand = new Random();
 
-        _speed_kph = rand.Next(80);
+//        _speed_kph = rand.Next(80);
 
-        return _speed_kph;
-    }
-}
+//        return _speed_kph;
+//    }
+//}
 
 public abstract class Car
 {
     string _name;
     int _speed_kph;
+    public event RaceDel RaceEv;
 
-    public abstract int Ride();
+    public abstract void Ride();
 }
