@@ -257,6 +257,8 @@ Game game = new Game { _players = new List<Player> { new Player { _nick = "Playe
 
 game.ShuffleDeck();
 
+game.PrintDeck();
+
 game.DealCards();
 
 game.PrintDeck();
@@ -372,9 +374,9 @@ public class Game
             for (int j = 0; j < _players[i]._cards.Count; j++)
             {
                 _deck.Add(_players[i]._cards[j]);
-
-                _players[i]._cards.RemoveAt(j);
             }
+
+            _players[i]._cards.Clear();
         }
     }
 
