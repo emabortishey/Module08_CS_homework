@@ -278,5 +278,55 @@ public class Player
 public class Game
 {
     List<Player> _players { get; set; }
-    List<Card> _deck {  get; set; }
+    List<Card> _deck = new List<Card> 
+    {   new Card { _suit = "Spades", _type = "Six" },
+        new Card { _suit = "Spades", _type = "Seven" },
+        new Card { _suit = "Spades", _type = "Eight" },
+        new Card { _suit = "Spades", _type = "Nine" },
+        new Card { _suit = "Spades", _type = "Ten" },
+        new Card { _suit = "Spades", _type = "Jack" },
+        new Card { _suit = "Spades", _type = "Queen" },
+        new Card { _suit = "Spades", _type = "King" },
+        new Card { _suit = "Spades", _type = "Ace" },
+
+        new Card { _suit = "Clubs", _type = "Six" },
+        new Card { _suit = "Clubs", _type = "Seven" },
+        new Card { _suit = "Clubs", _type = "Eight" },
+        new Card { _suit = "Clubs", _type = "Nine" },
+        new Card { _suit = "Clubs", _type = "Ten" },
+        new Card { _suit = "Clubs", _type = "Jack" },
+        new Card { _suit = "Clubs", _type = "Queen" },
+        new Card { _suit = "Clubs", _type = "King" },
+        new Card { _suit = "Clubs", _type = "Ace" },
+
+        new Card { _suit = "Hearts", _type = "Six" },
+        new Card { _suit = "Hearts", _type = "Seven" },
+        new Card { _suit = "Hearts", _type = "Eight" },
+        new Card { _suit = "Hearts", _type = "Nine" },
+        new Card { _suit = "Hearts", _type = "Ten" },
+        new Card { _suit = "Hearts", _type = "Jack" },
+        new Card { _suit = "Hearts", _type = "Queen" },
+        new Card { _suit = "Hearts", _type = "King" },
+        new Card { _suit = "Hearts", _type = "Ace" },
+
+        new Card { _suit = "Diamonds", _type = "Six" },
+        new Card { _suit = "Diamonds", _type = "Seven" },
+        new Card { _suit = "Diamonds", _type = "Eight" },
+        new Card { _suit = "Diamonds", _type = "Nine" },
+        new Card { _suit = "Diamonds", _type = "Ten" },
+        new Card { _suit = "Diamonds", _type = "Jack" },
+        new Card { _suit = "Diamonds", _type = "Queen" },
+        new Card { _suit = "Diamonds", _type = "King" },
+        new Card { _suit = "Diamonds", _type = "Ace" },
+    };
+
+    public void ShuffleDeck()
+    {
+        for(int i = 0; i < _deck.Count; i++)
+        {
+            Card buff = _deck[0];
+            _deck.RemoveAt(0);
+            _deck.Insert(Random.Shared.Next(_deck.Count), buff);
+        }
+    }
 }
