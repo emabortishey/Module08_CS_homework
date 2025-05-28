@@ -253,11 +253,18 @@
 
 */
 
-Game game = new Game();
+Game game = new Game { _players = new List<Player> { new Player { _nick = "Player1", _cards = new List<Card> { } }, new Player { _nick = "Player2", _cards = new List<Card> { } } } };
+
+game.ShuffleDeck();
+
+game.DealCards();
 
 game.PrintDeck();
 
-game.ShuffleDeck();
+game._players[0].PrintCards();
+game._players[1].PrintCards();
+
+game.ReturnIntoDeck();
 
 game.PrintDeck();
 
@@ -268,18 +275,18 @@ public class Card
 
     public override string ToString()
     {
-        return $"Suit: {_suit} Type: {_type}";
+        return $"\nSuit: {_suit} Type: {_type}";
     }
 }
 
 public class Player
 {
     public string _nick { get; set; }
-    List<Card> _cards { get; set; }
+    public List<Card> _cards { get; set; }
 
     public void PrintCards()
     {
-        WriteLine($"{_nick}'s card collection:\n\n");
+        WriteLine($"\n\n{_nick}'s card collection:\n\n");
 
         foreach (var card in _cards)
         {
@@ -290,7 +297,7 @@ public class Player
 
 public class Game
 {
-    List<Player> _players { get; set; }
+    public List<Player> _players { get; set; }
     List<Card> _deck = new List<Card> 
     {   new Card { _suit = "Spades", _type = "Six" },
         new Card { _suit = "Spades", _type = "Seven" },
@@ -340,6 +347,34 @@ public class Game
             Card buff = _deck[0];
             _deck.RemoveAt(0);
             _deck.Insert(Random.Shared.Next(_deck.Count), buff);
+        }
+    }
+
+    public void DealCards()
+    {
+        int buff = _deck.Count / _players.Count;
+
+        for (int i = 0; i < _players.Count; i++) 
+        {
+            for (int j = 0; j < buff; j++)
+            {
+                _players[i]._cards.Add(_deck[j]);
+
+                _deck.RemoveAt(j);
+            }
+        }
+    }
+
+    public void ReturnIntoDeck()
+    {
+        for (int i = 0; i < _players.Count; i++)
+        {
+            for (int j = 0; j < _players[i]._cards.Count; j++)
+            {
+                _deck.Add(_players[i]._cards[j]);
+
+                _players[i]._cards.RemoveAt(j);
+            }
         }
     }
 
