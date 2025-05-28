@@ -286,7 +286,7 @@ public class Player
 
     public void PrintCards()
     {
-        WriteLine($"\n\n{_nick}'s card collection:\n\n");
+        WriteLine($"\n\n\n{_nick}'s card collection:");
 
         foreach (var card in _cards)
         {
@@ -356,7 +356,7 @@ public class Game
 
         for (int i = 0; i < _players.Count; i++) 
         {
-            for (int j = 0; j < buff; j++)
+            for (int j = buff - 1; j >= 0; j--)
             {
                 _players[i]._cards.Add(_deck[j]);
 
