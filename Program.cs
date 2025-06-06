@@ -295,11 +295,38 @@ public class Player
             Write($"{card} ");
         }
     }
+
+    public Card PlaceCard()
+    {
+        int choosencard;
+        Card buffcard;
+
+        WriteLine($"\n{_nick}, choose the card:\n");
+
+        for(int i = 0; i< _cards.Count; i++)
+        {
+            Write(_cards[i]);
+        }
+
+        WriteLine();
+
+        choosencard = Convert.ToInt32(ReadLine());
+
+        buffcard = _cards[choosencard];
+        _cards.RemoveAt(choosencard);
+
+        return buffcard;
+    }
 }
+
+public delegate void PlayDelegate( );
 
 public class Game
 {
+    public event PlayDelegate thegame;
     public List<Player> _players { get; set; }
+    public List<Card> _table { get; set; }
+
     List<Card> _deck = new List<Card> 
     {   new Card { _suit = "Spades", _type = "Six" },
         new Card { _suit = "Spades", _type = "Seven" },
@@ -386,5 +413,10 @@ public class Game
         {
             WriteLine(card);
         }
+    }
+
+    public void Play()
+    {
+        
     }
 }
