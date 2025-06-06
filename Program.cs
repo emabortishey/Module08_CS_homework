@@ -266,9 +266,19 @@ game.PrintDeck();
 game._players[0].PrintCards();
 game._players[1].PrintCards();
 
-game.ReturnIntoDeck();
+//game.ReturnIntoDeck();
 
-game.PrintDeck();
+//game.PrintDeck();
+
+foreach (var player in game._players)
+{
+    game.thegame += player.PlaceCard;
+}
+
+while(game._players.Count > 0)
+{
+    game.Play();
+}
 
 public class Card
 {
@@ -286,6 +296,7 @@ public class Player
 {
     public string _nick { get; set; }
     public List<Card> _cards { get; set; }
+    public Card choosen { get; set; }
 
     public void PrintCards()
     {
@@ -297,10 +308,9 @@ public class Player
         }
     }
 
-    public Card PlaceCard()
+    public void PlaceCard()
     {
         int choosencard;
-        Card buffcard;
 
         WriteLine($"\n{_nick}, choose the card:\n");
 
@@ -313,14 +323,12 @@ public class Player
 
         choosencard = Convert.ToInt32(ReadLine());
 
-        buffcard = _cards[choosencard];
+        choosen = _cards[choosencard];
         _cards.RemoveAt(choosencard);
-
-        return buffcard;
     }
 }
 
-public delegate Card PlayDelegate( );
+public delegate void PlayDelegate( );
 
 public class Game
 {
@@ -370,6 +378,11 @@ public class Game
         new Card { _suit = "Diamonds", _type = "Ace", _cost = 14 },
     };
 
+    public Game()
+    {
+        _table = new List<Card> { };
+    }
+
     public void ShuffleDeck()
     {
         for(int i = 0; i < _deck.Count; i++)
@@ -418,25 +431,50 @@ public class Game
 
     public void Play()
     {
-        if (_table.Count != _players.Count)
+        if (_players.Count > 1)
         {
-            _table.Add(thegame());
-        }
-        else
-        {
-            Card maxval = _table.Max();
-
-            int maxindx = _table.IndexOf(maxval);
-
-            foreach(var card in _table)
+            if (_table.Count != _players.Count)
             {
-                _players[maxindx]._cards.Add(card);
-            }
+                thegame();
 
-            _table.Clear();
+                foreach(var player in _players)
+                {
+                    _table.Add(player.choosen);
+                }
+            }
+            else
+            {
+                int maxindx = 0;
+
+                for (int i = 1; i < _table.Count; i++)
+                {
+                    if (_table[i]._cost > _table[i - 1]._cost)
+                    {
+                        maxindx = i;
+                    }
+                }
+
+                WriteLine($"{_players[maxindx]._nick} got all the cards from the table for this round! Loser.\n\nTable:");
+
+                foreach(var card in _table)
+                {
+                    WriteLine(card);
+                }
+
+                foreach (var card in _table)
+                {
+                    _players[maxindx]._cards.Add(card);
+                }
+
+                _table.Clear();
+            }
+        }
+        else if(_players.Count == 1)
+        {
+            WriteLine($"{_players[0]._nick} IS WINNER! CONGRATS!");
         }
 
-        for(int i = 0; i< _players.Count; i++)
+        for (int i = 0; i < _players.Count; i++) 
         {
             if (_players[i] ._cards.Count == 0)
             {
