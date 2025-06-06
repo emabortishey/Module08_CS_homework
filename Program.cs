@@ -286,9 +286,11 @@ public class Card
     public string _type { get; set; }
     public int _cost { get; set; }
 
+    //  ♧ ♤ ♡ ♢ ♣ ♠ ♥ ♦
+
     public override string ToString()
     {
-        return $"\nSuit: {_suit} Type: {_type}";
+        return $"Suit: {_suit} Type: {_type}";
     }
 }
 
@@ -300,11 +302,13 @@ public class Player
 
     public void PrintCards()
     {
+        int indx = 1;
+
         WriteLine($"\n\n\n{_nick}'s card collection:");
 
         foreach (var card in _cards)
         {
-            Write($"{card} ");
+            WriteLine ($"{indx++}. - {card}");
         }
     }
 
@@ -316,15 +320,15 @@ public class Player
 
         for(int i = 0; i< _cards.Count; i++)
         {
-            Write(_cards[i]);
+            WriteLine ($"{i+1}. - {_cards[i]}");
         }
 
         WriteLine();
 
         choosencard = Convert.ToInt32(ReadLine());
 
-        choosen = _cards[choosencard];
-        _cards.RemoveAt(choosencard);
+        choosen = _cards[choosencard-1];
+        _cards.RemoveAt(choosencard-1);
     }
 }
 
@@ -445,6 +449,7 @@ public class Game
             else
             {
                 int maxindx = 0;
+                int indx = 1;
 
                 for (int i = 1; i < _table.Count; i++)
                 {
@@ -454,12 +459,14 @@ public class Game
                     }
                 }
 
-                WriteLine($"{_players[maxindx]._nick} got all the cards from the table for this round! Loser.\n\nTable:");
+                WriteLine("Table:");
 
                 foreach(var card in _table)
                 {
-                    WriteLine(card);
+                    WriteLine($"{indx++}. - {card}");
                 }
+
+                WriteLine($"\n{_players[maxindx]._nick} got all the cards from the table for this round! Loser.");
 
                 foreach (var card in _table)
                 {
