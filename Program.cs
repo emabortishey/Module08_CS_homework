@@ -435,5 +435,13 @@ public class Game
 
             _table.Clear();
         }
+
+        for(int i = 0; i< _players.Count; i++)
+        {
+            if (_players[i] ._cards.Count == 0)
+            {
+                _players.RemoveAt(i);
+            }
+        }
     }
 }
