@@ -274,6 +274,7 @@ public class Card
 {
     public string _suit { get; set; }
     public string _type { get; set; }
+    public int _cost { get; set; }
 
     public override string ToString()
     {
@@ -319,7 +320,7 @@ public class Player
     }
 }
 
-public delegate void PlayDelegate( );
+public delegate Card PlayDelegate( );
 
 public class Game
 {
@@ -328,45 +329,45 @@ public class Game
     public List<Card> _table { get; set; }
 
     List<Card> _deck = new List<Card> 
-    {   new Card { _suit = "Spades", _type = "Six" },
-        new Card { _suit = "Spades", _type = "Seven" },
-        new Card { _suit = "Spades", _type = "Eight" },
-        new Card { _suit = "Spades", _type = "Nine" },
-        new Card { _suit = "Spades", _type = "Ten" },
-        new Card { _suit = "Spades", _type = "Jack" },
-        new Card { _suit = "Spades", _type = "Queen" },
-        new Card { _suit = "Spades", _type = "King" },
-        new Card { _suit = "Spades", _type = "Ace" },
+    {   new Card { _suit = "Spades", _type = "Six", _cost = 6 },
+        new Card { _suit = "Spades", _type = "Seven", _cost = 7 },
+        new Card { _suit = "Spades", _type = "Eight", _cost = 8 },
+        new Card { _suit = "Spades", _type = "Nine", _cost = 9 },
+        new Card { _suit = "Spades", _type = "Ten", _cost = 10 },
+        new Card { _suit = "Spades", _type = "Jack", _cost = 11 },
+        new Card { _suit = "Spades", _type = "Queen", _cost = 12 },
+        new Card { _suit = "Spades", _type = "King", _cost = 13 },
+        new Card { _suit = "Spades", _type = "Ace", _cost = 14 },
 
-        new Card { _suit = "Clubs", _type = "Six" },
-        new Card { _suit = "Clubs", _type = "Seven" },
-        new Card { _suit = "Clubs", _type = "Eight" },
-        new Card { _suit = "Clubs", _type = "Nine" },
-        new Card { _suit = "Clubs", _type = "Ten" },
-        new Card { _suit = "Clubs", _type = "Jack" },
-        new Card { _suit = "Clubs", _type = "Queen" },
-        new Card { _suit = "Clubs", _type = "King" },
-        new Card { _suit = "Clubs", _type = "Ace" },
+        new Card { _suit = "Clubs", _type = "Six", _cost = 6 },
+        new Card { _suit = "Clubs", _type = "Seven", _cost = 7 },
+        new Card { _suit = "Clubs", _type = "Eight", _cost = 8 },
+        new Card { _suit = "Clubs", _type = "Nine", _cost = 9 },
+        new Card { _suit = "Clubs", _type = "Ten", _cost = 10 },
+        new Card { _suit = "Clubs", _type = "Jack", _cost = 11 },
+        new Card { _suit = "Clubs", _type = "Queen", _cost = 12 },
+        new Card { _suit = "Clubs", _type = "King", _cost = 13 },
+        new Card { _suit = "Clubs", _type = "Ace", _cost = 14 },
 
-        new Card { _suit = "Hearts", _type = "Six" },
-        new Card { _suit = "Hearts", _type = "Seven" },
-        new Card { _suit = "Hearts", _type = "Eight" },
-        new Card { _suit = "Hearts", _type = "Nine" },
-        new Card { _suit = "Hearts", _type = "Ten" },
-        new Card { _suit = "Hearts", _type = "Jack" },
-        new Card { _suit = "Hearts", _type = "Queen" },
-        new Card { _suit = "Hearts", _type = "King" },
-        new Card { _suit = "Hearts", _type = "Ace" },
+        new Card { _suit = "Hearts", _type = "Six", _cost = 6 },
+        new Card { _suit = "Hearts", _type = "Seven", _cost = 7 },
+        new Card { _suit = "Hearts", _type = "Eight", _cost = 8 },
+        new Card { _suit = "Hearts", _type = "Nine", _cost = 9 },
+        new Card { _suit = "Hearts", _type = "Ten", _cost = 10 },
+        new Card { _suit = "Hearts", _type = "Jack", _cost = 11 },
+        new Card { _suit = "Hearts", _type = "Queen", _cost = 12 },
+        new Card { _suit = "Hearts", _type = "King", _cost = 13 },
+        new Card { _suit = "Hearts", _type = "Ace", _cost = 14 },
 
-        new Card { _suit = "Diamonds", _type = "Six" },
-        new Card { _suit = "Diamonds", _type = "Seven" },
-        new Card { _suit = "Diamonds", _type = "Eight" },
-        new Card { _suit = "Diamonds", _type = "Nine" },
-        new Card { _suit = "Diamonds", _type = "Ten" },
-        new Card { _suit = "Diamonds", _type = "Jack" },
-        new Card { _suit = "Diamonds", _type = "Queen" },
-        new Card { _suit = "Diamonds", _type = "King" },
-        new Card { _suit = "Diamonds", _type = "Ace" },
+        new Card { _suit = "Diamonds", _type = "Six", _cost = 6 },
+        new Card { _suit = "Diamonds", _type = "Seven", _cost = 7 },
+        new Card { _suit = "Diamonds", _type = "Eight", _cost = 8 },
+        new Card { _suit = "Diamonds", _type = "Nine", _cost = 9 },
+        new Card { _suit = "Diamonds", _type = "Ten", _cost = 10 },
+        new Card { _suit = "Diamonds", _type = "Jack", _cost = 11 },
+        new Card { _suit = "Diamonds", _type = "Queen", _cost = 12 },
+        new Card { _suit = "Diamonds", _type = "King", _cost = 13 },
+        new Card { _suit = "Diamonds", _type = "Ace", _cost = 14 },
     };
 
     public void ShuffleDeck()
@@ -417,6 +418,13 @@ public class Game
 
     public void Play()
     {
-        
+        if (_table.Count != _players.Count)
+        {
+            _table.Add(thegame());
+        }
+        else
+        {
+
+        }
     }
 }
