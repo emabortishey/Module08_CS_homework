@@ -424,7 +424,16 @@ public class Game
         }
         else
         {
+            Card maxval = _table.Max();
 
+            int maxindx = _table.IndexOf(maxval);
+
+            foreach(var card in _table)
+            {
+                _players[maxindx]._cards.Add(card);
+            }
+
+            _table.Clear();
         }
     }
 }
